@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         QuestionFactory.getInstance().initQuestions(questiones)
         QuestionFactory.getInstance().setQuestionCategory("世界地理常识")
         
-        self.progressQuestionAndUpdateView()
+        self. ()
     }
     
     func progressQuestionAndUpdateView() {
@@ -74,7 +74,8 @@ class ViewController: UIViewController {
     func quitApplication() -> Void {
         //QuestionFactory.getInstance().clear()
         //QuestionFactory.releaseInstance()
-        self.trueButton.sendAction(Selector("suspend"), to: UIApplication.shared, for: nil)
+        
+        self.trueButton.sendAction(#selector(NSXPCConnection.suspend), to: UIApplication.shared, for: nil)
     }
 
     @IBAction func onAnswerBtnClick(_ sender: UIButton) {
