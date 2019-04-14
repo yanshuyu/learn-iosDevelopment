@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         QuestionFactory.getInstance().initQuestions(questiones)
         QuestionFactory.getInstance().setQuestionCategory("世界地理常识")
         
-        self. ()
+        self.progressQuestionAndUpdateView()
     }
     
     func progressQuestionAndUpdateView() {
