@@ -18,17 +18,9 @@ see commit history for details.
 9. 在outline中ctrl水平拖动image view到自身, 设置width和height为60
 
 ### 基本操作2
-
 1. 在outline的tableviewCell上点右键可以看到这个cell中定义的所有outlet
 2. UIKit中所有View都自带CALayer, 这个layer对象可以控制view的背景色,边框, 透明度, 圆角
 
-### 基本操作3
-1. 将image view在outline中拖动到cell之上
-2. aspect fill + clip to bounds
-3. cell中加两个Label: Field(Medium) + Value
-4. stackview这两个label
-5. 见251页,给stackview设置constraints(spacing以及垂直居中)
-6. 这时会产生一个layout warning: 不能给两个label设置相同的hugging priority, 原因是我们只给stack view设置了constraints,而让stack view自动管理它所包含label的constraints, 结果是Field被拉伸了, Value大小保持正常. 这是因为Field和Value有相同的hugging priority:251, 只要把Field的priority设置的更高比如261, 那么Field就会保持自己的本来大小(intrinsic size), 而Value则被拉伸.
 
 ### 设置圆角:
 
@@ -39,8 +31,18 @@ cell.thumbnailImageView.clipsToBounds = true
 或者选中image view在identity inspector中新增一个runtime属性layer.cornerRadius值为Number:30
 并在attributes inspector中勾选clip to bounds
 
+
+### 自适应大小的cell
+1. 将Value label的Lines从1改成0, 这样Label可以显示多行文字
+2. tableView.estimatedHeight改成它的预计行高值(36/44), 以优化性能, 默认值是0
+3. tableView.rowHeight = UITableViewAutomaticDimension, 从iOS10开始, 这已经是默认值
+4. 这时console会有个layout warning, 解决办法是给这个cell中包含的那个stack view设置top和bottom约束(之前已经给它设定了leading/trailing和center vertically的约束,但是对于自适应大小的cell来说还不够)
+
+
 ### 美化tableview/表格线
-```swift
+```swiftv
+//roration margin
+self.tableView.cellLayoutMarginsFollowReadableWidth = true
 // set table view bg color
 tableView.backgroundColor = UIColor(white: 240.0/255, alpha: 0.2)
 // remove empty rows
@@ -54,6 +56,9 @@ tableView.separatorColor = UIColor(white: 240.0/255, alpha: 0.8)
 1) 在didFinishLaunchingWithOptions设置nav bar的背景色
 
 ```swift
+//big title
+self.navigationController?.navigationBar.prefersLargeTitles = true
+
 // nav bar bg color
 UINavigationBar.appearance().barTintColor = UIColor(red: 216.0/255, green: 74.0/255, blue: 32.0/255, alpha: 1.0)
 
@@ -79,23 +84,31 @@ navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, tar
 ```swift
 title = restaurant.name
 ```
+4) 全透明navigation bar
+navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+navigationController?.navigationBar.shadowImage = UIImage()
+navigationController?.navigationBar.isTranslucent = true
+
+5) 全局修改nav bar返回导航图片
+let backIndicator = UIImage(named: "back")
+UINavigationBar.appearance().backIndicatorImage = backIndicator
+UINavigationBar.appearance().backIndicatorTransitionMaskImage = backIndicator
+
 
 ## 美化status bar
 修改status bar黑色文字为白色, 两种方式:
-
-1) ViewController逐个修改, 覆盖preferredStatusBarStyle即可(.lightContent),我设置了但是不起作用, 参考这里的[solution][1], 在 viewDidLoad加上`navigationController?.navigationBar.barStyle = .blackTranslucent`
-
+1) ViewController逐个修改, 覆盖preferredStatusBarStyle方法即可(.lightContent), 如果当前的ViewController被嵌套在Navigation Controller中，
+需要重载Navigation Controller中的preferredStatusBarStyle
+ open override var preferredStatusBarStyle: UIStatusBarStyle{
+    return topViewController?.preferredStatusBarStyle ?? .default
+}
 
 2) 全局修改
-
 1. Info.plist设置`View controller-based status bar appearance=NO`
 2. AppDelegate中`UIApplication.shared.statusBarStyle = .lightContent`
 
-### 自适应大小的cell
-1. 将Value label的Lines从1改成0, 这样Label可以显示多行文字
-2. tableView.estimatedHeight改成它的预计行高值(36/44), 以优化性能, 默认值是0
-3. tableView.rowHeight = UITableViewAutomaticDimension, 从iOS10开始, 这已经是默认值
-4. 这时console会有个layout warning, 解决办法是给这个cell中包含的那个stack view设置top和bottom约束(之前已经给它设定了leading/trailing和center vertically的约束,但是对于自适应大小的cell来说还不够)
+
+
 
 ### 圆形button
 1. title=blank, image=check, (type=system, tint=white设置按钮的颜色)

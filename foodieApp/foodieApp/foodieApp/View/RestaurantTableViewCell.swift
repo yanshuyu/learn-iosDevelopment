@@ -9,15 +9,16 @@
 import UIKit
 
 class RestaurantTableViewCell: UITableViewCell {
-    @IBOutlet var nameLable: UILabel!;
-    @IBOutlet var locationLable: UILabel!;
-    @IBOutlet var typeLable: UILabel!;
+    @IBOutlet var nameLable: UILabel!
+    @IBOutlet var locationLable: UILabel!
+    @IBOutlet var typeLable: UILabel!
     @IBOutlet var thumbnailImageView: UIImageView!{
         didSet {
             thumbnailImageView.layer.cornerRadius = thumbnailImageView.bounds.width * 0.15
             thumbnailImageView.clipsToBounds = true
         }
     }
+    @IBOutlet var markImageView:UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,7 +36,8 @@ class RestaurantTableViewCell: UITableViewCell {
         self.locationLable.text = data.location
         self.typeLable.text = data.category
         self.thumbnailImageView.image = UIImage(named: data.thumbnailImageName)
-        self.accessoryType = data.isMarked ? .checkmark : .none
+        self.markImageView.isHidden = !data.isMarked
+        self.markImageView.tintColor = #colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1)
     }
 
 }
