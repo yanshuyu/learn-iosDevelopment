@@ -108,45 +108,12 @@ UINavigationBar.appearance().backIndicatorTransitionMaskImage = backIndicator
 2. AppDelegate中`UIApplication.shared.statusBarStyle = .lightContent`
 
 
-
-
-### 圆形button
-1. title=blank, image=check, (type=system, tint=white设置按钮的颜色)
-2. 点pin按钮,设置top=8,right=8,width=28,height=28
-
-### 全屏背景
-1. drag a new view controller
-2. drag image view onto it, resize to full screen
-3. add missing constraints, 但是Xcode8.1上这个选项是灰的, 最后用了reset to suggested constraints
-
-### 半屏窗口
-1. container view: drag a view object onto the image view(x=53, y=40, 269*420)
-
-### 右上角关闭按钮
-1. Drag a button(top=-13, right=-12, 28*28), title=blank, image=cross
-2. 在前一屏中加入`@IBAction func close(segue: UIStoryboardSegue) {}`这句代码告诉Xcode这个viewController可以被unwind
-3. Ctrl drag this close button to the exit button on this review scene, and select `closeWithSegue:`
-
-### 让全屏背景模糊
-
-在viewDidLoad中加入
-
-```swift
-let blurEffect = UIBlurEffect(style: .dark)
-let blurEffectView = UIVisualEffectView(effect: blurEffect)
-blurEffectView.frame = view.bounds
-backgroundImageView.addSubview(blurEffectView)
-
-```
-就是给ImageView加上一个大小相同的subview, 上面代码中第三行view变量是所有UIViewController都有的, 表示这个ViewController管理的顶层view对象.
-
-### Container view大小变换(scaleX)
-怎么将view的大小变成0? 大小值用`CGAffineTransform`表示
-
-1. 大小为0:CGAffineTransform(scaleX: 0, y: 0)
-2. 原始大小及位置:CGAffineTransform.indentiy
-3. 在viewDidLoad中将view的transform属性设置为0
-4. 在viewDIdAppear中将view的transform属性设置为原始值.
+## 添加地图功能
+1) MKMapView控件提供地图功能
+2) CLGeocoder提供文本地址和经纬度地址相互转换功能, CLGeocoder.geocodeAddressString 和 CLGeocoder.reverseGeocodeLocation
+3) 通过经纬度地址（CLPlacemark）构造地点指示器data（MKPointAnnotation）
+4） MKMapView.addAnnotation()添加默认样式地点指示器，MKMapView.setRegion 或 MKMapView.selectAnnotation 缩放到指定区域或地点
+5) 自定义地点指示器样式,需要conform MKMapViewDelegate protocol并实现 mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?函数， 返回自定义的MKAnnotationView对象
 
 
 简单动画

@@ -23,6 +23,8 @@ class RestaurantTableViewController: UITableViewController {
                                                                                  NSAttributedString.Key.foregroundColor: UIColor(red: 231.0 / 255.0, green: 76.0 / 255.0, blue: 60.0 / 255.0, alpha: 1.0)]
         }
         
+        let backButtomItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = backButtomItem
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -34,6 +36,7 @@ class RestaurantTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         self.navigationController?.hidesBarsOnSwipe = true
         self.tableView.reloadData()
+        
     }
     
     // MARK: - Statuts bar Customizing
@@ -181,7 +184,6 @@ class RestaurantTableViewController: UITableViewController {
                 let restaurantDetailView = segue.destination as! RestautantDetailViewController
                 restaurantDetailView.restaurantData = RestaurantFactory.getInstance().getRestaurants()[indexPath.row]
             }
-            
         }
     }
     
