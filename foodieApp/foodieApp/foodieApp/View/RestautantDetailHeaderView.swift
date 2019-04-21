@@ -13,6 +13,7 @@ class RestautantDetailHeaderView: UIView {
     @IBOutlet var typeLable: UILabel!
     @IBOutlet var headerImageView: UIImageView!
     @IBOutlet var markButton: UIButton!
+    @IBOutlet var rateImageView: UIImageView!
     
     /*
     // Only override draw() if you perform custom drawing.
@@ -27,6 +28,9 @@ class RestautantDetailHeaderView: UIView {
         self.typeLable.text = restaurantData.category
         self.headerImageView.image = UIImage(named: restaurantData.thumbnailImageName)
         self.markButton.tintColor = restaurantData.isMarked ? #colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1) : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        if let rateImage = restaurantData.rateImage {
+            self.rateImageView.image = UIImage(named: rateImage)
+        }
     }
     
     

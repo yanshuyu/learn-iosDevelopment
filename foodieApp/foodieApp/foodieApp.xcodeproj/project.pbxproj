@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1143327E22679BF200B3180A /* RestaurantDetailMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143327D22679BF200B3180A /* RestaurantDetailMapViewController.swift */; };
+		11433280226B12BF00B3180A /* RestaurantRateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143327F226B12BF00B3180A /* RestaurantRateViewController.swift */; };
 		11FF102A226086A20077F4E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FF1029226086A20077F4E7 /* AppDelegate.swift */; };
 		11FF102F226086A20077F4E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11FF102D226086A20077F4E7 /* Main.storyboard */; };
 		11FF1031226086A30077F4E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11FF1030226086A30077F4E7 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		1143327D22679BF200B3180A /* RestaurantDetailMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailMapViewController.swift; sourceTree = "<group>"; };
+		1143327F226B12BF00B3180A /* RestaurantRateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantRateViewController.swift; sourceTree = "<group>"; };
 		11FF1026226086A20077F4E7 /* foodieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = foodieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11FF1029226086A20077F4E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11FF102E226086A20077F4E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				11FF1045226300100077F4E7 /* RestautantDetailViewController.swift */,
 				11FF106322671DCF0077F4E7 /* FoodieNavigationController.swift */,
 				1143327D22679BF200B3180A /* RestaurantDetailMapViewController.swift */,
+				1143327F226B12BF00B3180A /* RestaurantRateViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11FF105E22647F080077F4E7 /* RestautantDetailHeaderView.swift in Sources */,
+				11433280226B12BF00B3180A /* RestaurantRateViewController.swift in Sources */,
 				11FF1062226595080077F4E7 /* RestautantDetailViewDescCell.swift in Sources */,
 				11FF1046226300100077F4E7 /* RestautantDetailViewController.swift in Sources */,
 				11FF10442261B18A0077F4E7 /* Restaurant.swift in Sources */,

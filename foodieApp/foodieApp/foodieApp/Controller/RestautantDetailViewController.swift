@@ -61,12 +61,41 @@ class RestautantDetailViewController: UIViewController {
     
     
     // MARK: - Controller View Transaction
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DetailToMap" {
             if let restaurantDetailMapView = segue.destination as? RestaurantDetailMapViewController {
                 restaurantDetailMapView.restaurantData = self.restaurantData
             }
             self.navigationItem.title = ""
+        }
+        
+        if segue.identifier == "DetailToRate" {
+            if let data = self.restaurantData {
+                if let rateViewController = segue.destination as? RestaurantRateViewController {
+                    rateViewController.restaurant = data
+                }
+            }
+        }
+    }
+    
+    //unwind segue
+    @IBAction func unwindToDetailViewForClose(segue: UIStoryboardSegue) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func unWindToDetailForRating(segue: UIStoryboardSegue) {
+        if let rateImageName = segue.identifier {
+            self.restaurantDetailHeaderView.rateImageView.image = UIImage(named: rateImageName)
+            self.restaurantDetailHeaderView.rateImageView.transform = CGAffineTransform.init(scaleX: 0.2, y: 0.2)
+            self.restaurantDetailHeaderView.rateImageView.alpha = 0.5
+            self.restaurantData?.rateImage = rateImageName
+            
+            UIView.animate(withDuration: 1.0, animations: {
+                self.restaurantDetailHeaderView.rateImageView.transform = .identity
+                self.restaurantDetailHeaderView.rateImageView.alpha = 1.0
+            }, completion: nil)
+            
         }
     }
     

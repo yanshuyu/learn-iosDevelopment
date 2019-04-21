@@ -16,13 +16,22 @@ class Restaurant {
     var thumbnailImageName: String
     var isMarked: Bool
     var detailDesc: String
-    init(name: String, location: String, category: String, thumbnailImageName: String, isMarked: Bool, description: String ) {
+    var rateImage: String? = nil
+    
+
+    
+    init(name: String, location: String, category: String, thumbnailImageName: String, isMarked: Bool, description: String, rateImage: String?) {
         self.name = name
         self.location = location
         self.category = category
         self.thumbnailImageName = thumbnailImageName
         self.isMarked = isMarked
         self.detailDesc = description
+        self.rateImage = rateImage
+    }
+    
+    convenience init(name: String, location: String, category: String, thumbnailImageName: String, isMarked: Bool, description: String) {
+        self.init(name: name, location: location, category: category, thumbnailImageName: thumbnailImageName, isMarked: isMarked, description: description, rateImage: nil)
     }
     
     convenience init() {
