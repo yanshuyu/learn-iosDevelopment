@@ -12,11 +12,11 @@ import MapKit
 class RestaurantDetailThumbnailMapCell: UITableViewCell {
     @IBOutlet weak var thumbnailMapView: MKMapView!
     
-    func initByData(_ data: Restaurant?) -> Void {
+    func initByData(_ data: RestaurantModel?) -> Void {
         self.thumbnailMapView.layer.cornerRadius = 15
         self.thumbnailMapView.clipsToBounds = true
         if let data = data {
-            self.zoomToAnnotationByLocation(data.location)
+            self.zoomToAnnotationByLocation(data.location ?? "")
         }
     }
     

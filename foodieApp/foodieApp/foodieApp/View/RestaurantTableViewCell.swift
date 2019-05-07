@@ -31,11 +31,13 @@ class RestaurantTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func initByData(_ data: Restaurant) -> Void {
+    func initByData(_ data: RestaurantModel) -> Void {
         self.nameLable.text = data.name
         self.locationLable.text = data.location
         self.typeLable.text = data.category
-        self.thumbnailImageView.image = UIImage(named: data.thumbnailImageName)
+        if let imageData = data.thumbnailImage {
+            self.thumbnailImageView.image = UIImage(data: imageData)
+        }
         self.markImageView.isHidden = !data.isMarked
         self.markImageView.tintColor = #colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1)
     }

@@ -74,25 +74,25 @@ class RestaurantFactory {
     
     
     // MARK: - RestaurantFactory Data Management
-    private var restaurants: [Restaurant]
+    private var restaurants: [RestaurantModel]
     
-    func setRestaurants(_ restaurants: [Restaurant]) -> Void {
-        self.restaurants = restaurants
-    }
+//    func setRestaurants(_ restaurants: [Restaurant]) -> Void {
+//        self.restaurants = restaurants
+//    }
     
-    func appendRestaurant(_ restaurant: Restaurant) -> Void {
+    func appendRestaurant(_ restaurant: RestaurantModel) -> Void {
         self.restaurants.append(restaurant)
     }
     
-    func appendRestaurants(_ restaurants: [Restaurant]) -> Void {
-        self.restaurants += restaurants
-    }
+//    func appendRestaurants(_ restaurants: [Restaurant]) -> Void {
+//        self.restaurants += restaurants
+//    }
     
-    func getRestaurants() -> [Restaurant] {
+    func getRestaurants() -> [RestaurantModel] {
         return self.restaurants
     }
     
-    func getRestaurantAtIndedx(_ index: Int) -> Restaurant? {
+    func getRestaurantAtIndedx(_ index: Int) -> RestaurantModel? {
         if index >= self.restaurants.count {
             return nil
         }
@@ -100,7 +100,7 @@ class RestaurantFactory {
         return self.restaurants[index]
     }
     
-    func removeRestaurantAtIndex(_ index: Int) -> Restaurant? {
+    func removeRestaurantAtIndex(_ index: Int) -> RestaurantModel? {
         return self.restaurants.remove(at: index)
     }
     

@@ -28,6 +28,10 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Your need to grant the app to access your camera to take restautant photo</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Your need to grant the app to access your photo libary to upload restaurant photo</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

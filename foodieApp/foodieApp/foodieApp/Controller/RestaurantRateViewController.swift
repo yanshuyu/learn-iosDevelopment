@@ -14,7 +14,7 @@ class RestaurantRateViewController: UIViewController {
     @IBOutlet var rateButtons: [UIButton]!
     
     
-    var restaurant: Restaurant? = nil
+    var restaurant: RestaurantModel? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +34,8 @@ class RestaurantRateViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if let data = self.restaurant {
-            self.restaurantImageView.image = UIImage(named: data.thumbnailImageName)
+        if let data = self.restaurant, let imageData = data.thumbnailImage {
+            self.restaurantImageView.image = UIImage(data: imageData)
         }
         
         // rate buttons animation

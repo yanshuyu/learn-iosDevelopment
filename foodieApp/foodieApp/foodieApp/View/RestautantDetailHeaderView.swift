@@ -23,13 +23,15 @@ class RestautantDetailHeaderView: UIView {
     }
     */
     
-    func initByData(_ restaurantData: Restaurant) -> Void {
+    func initByData(_ restaurantData: RestaurantModel) -> Void {
         self.nameLable.text = restaurantData.name
         self.typeLable.text = restaurantData.category
-        self.headerImageView.image = UIImage(named: restaurantData.thumbnailImageName)
+        if let thumbImageData = restaurantData.thumbnailImage {
+            self.headerImageView.image = UIImage(data: thumbImageData)
+        }
         self.markButton.tintColor = restaurantData.isMarked ? #colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1) : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        if let rateImage = restaurantData.rateImage {
-            self.rateImageView.image = UIImage(named: rateImage)
+        if let rateImagedData = restaurantData.rateImage {
+            self.rateImageView.image = UIImage(data: rateImagedData)
         }
     }
     

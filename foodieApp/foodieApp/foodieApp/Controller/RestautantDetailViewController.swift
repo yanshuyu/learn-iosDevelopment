@@ -9,7 +9,7 @@
 import UIKit
 
 class RestautantDetailViewController: UIViewController {
-    var restaurantData: Restaurant? = nil
+    var restaurantData: RestaurantModel? = nil
     
     @IBOutlet var restaurantDetailHeaderView: RestautantDetailHeaderView!
     @IBOutlet var restaurantDetailTableView: UITableView!
@@ -17,19 +17,17 @@ class RestautantDetailViewController: UIViewController {
     //MARK: - NavigationBar Customizing
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        self.navigationItem.largeTitleDisplayMode = .never
-        self.navigationController?.navigationBar.tintColor = UIColor.white
+        
+        self.title = ""
+        let backButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil )
+        self.navigationItem.backBarButtonItem = backButtonItem
+
       
         self.restaurantDetailTableView.delegate = self
         self.restaurantDetailTableView.dataSource = self
         self.restaurantDetailTableView.contentInsetAdjustmentBehavior = .never
         self.restaurantDetailHeaderView.typeLable.layer.cornerRadius = 5
         self.restaurantDetailHeaderView.typeLable.layer.masksToBounds = true
-        
-        let backButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil )
-        self.navigationItem.backBarButtonItem = backButtonItem
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,7 +36,7 @@ class RestautantDetailViewController: UIViewController {
         if let data = restaurantData {
             self.restaurantDetailHeaderView.initByData(data)
         }
-        
+        self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.hidesBarsOnSwipe = false
         self.navigationController?.setNavigationBarHidden(false, animated: true)
 
@@ -48,6 +46,9 @@ class RestautantDetailViewController: UIViewController {
         if let data = self.restaurantData {
             data.isMarked = !data.isMarked
             self.restaurantDetailHeaderView.markButton.tintColor = data.isMarked ? #colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1) : #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                appDelegate.saveContext()
+            }
         }
         
     }
@@ -89,7 +90,11 @@ class RestautantDetailViewController: UIViewController {
             self.restaurantDetailHeaderView.rateImageView.image = UIImage(named: rateImageName)
             self.restaurantDetailHeaderView.rateImageView.transform = CGAffineTransform.init(scaleX: 0.2, y: 0.2)
             self.restaurantDetailHeaderView.rateImageView.alpha = 0.5
-            self.restaurantData?.rateImage = rateImageName
+            self.restaurantData?.rateImage = UIImage(named: rateImageName)?.pngData()
+            
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                appDelegate.saveContext()
+            }
             
             UIView.animate(withDuration: 1.0, animations: {
                 self.restaurantDetailHeaderView.rateImageView.transform = .identity
@@ -114,16 +119,16 @@ extension RestautantDetailViewController: UITableViewDataSource, UITableViewDele
         case 0:
             let cell = self.restaurantDetailTableView.dequeueReusableCell(withIdentifier: "RestaurantDetailAPCell", for: indexPath) as! RestaurantDetailViewAPCell
             cell.iconImageView.image = UIImage(named: "phone")
-            cell.shortDescLable.text = "123-000-\(indexPath.row)"
+            cell.shortDescLable.text = self.restaurantData?.phoneNumber
             return cell
         case 1:
             let cell = self.restaurantDetailTableView.dequeueReusableCell(withIdentifier: "RestaurantDetailAPCell", for: indexPath) as! RestaurantDetailViewAPCell
-            cell.iconImageView.image = UIImage(named: "phone")
+            cell.iconImageView.image = UIImage(named: "location")
             cell.shortDescLable.text = self.restaurantData?.location
             return cell
         case 2:
             let cell = self.restaurantDetailTableView.dequeueReusableCell(withIdentifier: "RestaurantDetailDescCell", for: indexPath) as! RestautantDetailViewDescCell
-            cell.longDescLable.text = self.restaurantData?.detailDesc == "" ? self.restaurantData?.description : self.restaurantData?.detailDesc
+            cell.longDescLable.text = (self.restaurantData?.detailDesc == nil || self.restaurantData?.detailDesc == "") ? self.restaurantData?.description : self.restaurantData?.detailDesc
             
             return cell
         case 3:

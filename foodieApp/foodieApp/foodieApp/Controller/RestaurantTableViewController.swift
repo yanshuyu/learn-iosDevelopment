@@ -7,36 +7,74 @@
 //
 
 import UIKit
+import CoreData
 
 class RestaurantTableViewController: UITableViewController {
+    @IBOutlet weak var emptyView: UIView!
+    
+    lazy var restaurantDataFetchResultController: NSFetchedResultsController? = { () -> NSFetchedResultsController<RestaurantModel>? in
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("Can't access delegate of Foodie!")
+        }
+        let sortByNameDescpritor = NSSortDescriptor(key: "name", ascending: true)
+        let fetchRequest: NSFetchRequest<RestaurantModel> = RestaurantModel.fetchRequest()
+        fetchRequest.sortDescriptors = [sortByNameDescpritor]
+        let fetchReslutController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                            managedObjectContext: appDelegate.persistentContainer.viewContext,
+                                                            sectionNameKeyPath: nil,
+                                                            cacheName: nil)
+        fetchReslutController.delegate = self
+        return fetchReslutController
+    }()
+    lazy var allRestaurant = [RestaurantModel]()
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.cellLayoutMarginsFollowReadableWidth = true
         
-    // MARK: - NavigationController Customizing
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        // MARK: - NavigationController Customizing
+        //custom back button indicator and title
+        let backIndicator = UIImage(named: "back")
+        self.navigationController?.navigationBar.backIndicatorImage = backIndicator
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backIndicator
+        
+        let backButtomItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = backButtomItem
+        
+        //transparent navigation bar
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
+        
+       
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         if let rubikFont = UIFont(name: "Rubik-Medium", size: 40){
             self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: rubikFont,
                                                                                  NSAttributedString.Key.foregroundColor: UIColor(red: 231.0 / 255.0, green: 76.0 / 255.0, blue: 60.0 / 255.0, alpha: 1.0)]
         }
         
-        let backButtomItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        self.navigationItem.backBarButtonItem = backButtomItem
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        self.tableView.backgroundView = self.emptyView
+        self.tableView.backgroundView?.isHidden = true
+        
+        //load restaurant data
+        loadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.hidesBarsOnSwipe = true
+        //self.loadData()
+        if self.allRestaurant.count > 0 {
+            self.tableView.backgroundView?.isHidden = true
+            self.tableView.separatorStyle = .singleLine
+        }else{
+            self.tableView.backgroundView?.isHidden = false
+            self.tableView.separatorStyle = .none
+        }
         self.tableView.reloadData()
-        
     }
     
     // MARK: - Statuts bar Customizing
@@ -53,14 +91,15 @@ class RestaurantTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return RestaurantFactory.getInstance().getRestaurants().count
+        //return RestaurantFactory.getInstance().getRestaurants().count
+        return allRestaurant.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "restaurantCell", for: indexPath) as! RestaurantTableViewCell
-        cell.initByData(RestaurantFactory.getInstance().getRestaurants()[indexPath.row])
-
+        //cell.initByData(RestaurantFactory.getInstance().getRestaurants()[indexPath.row])
+        cell.initByData(allRestaurant[indexPath.row])
         return cell
     }
  
@@ -131,13 +170,22 @@ class RestaurantTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let restaurantData = RestaurantFactory.getInstance().getRestaurants()[indexPath.row]
-        
+        //let restaurantData = RestaurantFactory.getInstance().getRestaurants()[indexPath.row]
+        let restaurantData = self.allRestaurant[indexPath.row]
         let delectAction = UIContextualAction(style: .destructive, title: nil, handler: { (action, view, completeHandler) in
-            if let _ = RestaurantFactory.getInstance().removeRestaurantAtIndex(indexPath.row) {
-                tableView.deleteRows(at: [indexPath], with: .fade)
+            var success = false
+            //            if let _ = RestaurantFactory.getInstance().removeRestaurantAtIndex(indexPath.row) {
+            //                tableView.deleteRows(at: [indexPath], with: .fade)
+            //            }
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                let managedObjectContext = appDelegate.persistentContainer.viewContext
+                if let deletedRestaurant = self.restaurantDataFetchResultController?.object(at: indexPath) {
+                    managedObjectContext.delete(deletedRestaurant)
+                    appDelegate.saveContext()
+                    success = true
+                }
             }
-            completeHandler(true)
+            completeHandler(success)
         })
         delectAction.backgroundColor = UIColor.red
         delectAction.image = UIImage(named: "delete")
@@ -153,9 +201,9 @@ class RestaurantTableViewController: UITableViewController {
         
         let shareAction = UIContextualAction(style: .normal, title: nil, handler: { (action, view, completeHandler) in
             var activityItems: [Any] = []
-            let shareDesc = "Hi, this is a very good restaurant named \(restaurantData.name), look!"
+            let shareDesc = "Hi, this is a very good restaurant named \(restaurantData.name!), look!"
             activityItems.append(shareDesc)
-            if let shareImage = UIImage(named: restaurantData.thumbnailImageName) {
+            if let imageData = restaurantData.thumbnailImage, let shareImage = UIImage(data: imageData) {
                 activityItems.append(shareImage)
             }
             let activityController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
@@ -182,18 +230,99 @@ class RestaurantTableViewController: UITableViewController {
         if segue.identifier == "MainToDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let restaurantDetailView = segue.destination as! RestautantDetailViewController
-                restaurantDetailView.restaurantData = RestaurantFactory.getInstance().getRestaurants()[indexPath.row]
+                //restaurantDetailView.restaurantData = RestaurantFactory.getInstance().getRestaurants()[indexPath.row]
+                restaurantDetailView.restaurantData = self.allRestaurant[indexPath.row]
             }
         }
     }
     
+    
+    
+    // MARK: - Restaurant Core Data
+    func loadData() -> Void {
+//        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+//            fatalError("Can't find AppDelegate of Foodie")
+//        }
+
+//        let fetchRequst: NSFetchRequest<RestaurantModel> = RestaurantModel.fetchRequest()
+//        do {
+//            try allRestaurant = appDelegate.persistentContainer.viewContext.fetch(fetchRequst)
+//        }catch {
+//            fatalError("Fetch core data error: \(error)")
+//        }
+
+        do {
+            try self.restaurantDataFetchResultController?.performFetch()
+        } catch {
+            print("Fetch Data Error: \(error.localizedDescription)")
+        }
+        
+        if let fetchResult = self.restaurantDataFetchResultController?.fetchedObjects {
+            self.allRestaurant = fetchResult
+        }
+        print("Fetch all restaurant data from core data: \(self.allRestaurant)")
+    }
+    
+    @IBAction func unwindToMain(segue: UIStoryboardSegue){
+        if segue.identifier == "unwindFromNewToMain" {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
     
     // MARK: - Helper Function
     private func updateMarkImageStateForCell(_ cell: RestaurantTableViewCell, isVisible: Bool){
         cell.markImageView.isHidden = !isVisible
         cell.tintColor = #colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1)
     }
-
+    
    
+}
+
+
+
+// MARK: - Core Date FetchResultController Delegate
+extension RestaurantTableViewController: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+       self.tableView.beginUpdates()
+    }
+    
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
+        
+        switch type {
+        case .insert:
+            if let insertIndexPath = newIndexPath {
+                self.tableView.insertRows(at: [insertIndexPath], with: .automatic)
+            }
+            
+        case .delete:
+            if let deleteIndexPath = indexPath {
+                self.tableView.deleteRows(at: [deleteIndexPath], with: .automatic)
+            }
+            
+        case .update:
+            if let updateIndexPath = indexPath {
+                self.tableView.reloadRows(at: [updateIndexPath], with: .automatic)
+            }
+            
+        default:
+            self.tableView.reloadData()
+        }
+        
+        
+        if let latestRestaurants = controller.fetchedObjects {
+            self.allRestaurant = latestRestaurants as! [RestaurantModel]
+        }
+    }
+    
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>){
+        self.tableView.endUpdates()
+    }
+
 }
 

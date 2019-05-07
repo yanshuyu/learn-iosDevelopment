@@ -12,7 +12,7 @@ import MapKit
 class RestaurantDetailMapViewController: UIViewController {
     @IBOutlet var mapView: MKMapView!
     
-    var restaurantData: Restaurant? = nil
+    var restaurantData: RestaurantModel? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,11 +20,13 @@ class RestaurantDetailMapViewController: UIViewController {
         self.mapView.showsTraffic = true
         self.mapView.showsCompass = true
         self.mapView.showsScale = true
-        self.navigationItem.title = " "
+        self.title = ""
+
     
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.tintColor = UIColor.black
         if let restaurantData = self.restaurantData {
             let (success, msg) = self.zoomToAnnotaion(toRestaurant: restaurantData)
             if !success {
@@ -36,12 +38,12 @@ class RestaurantDetailMapViewController: UIViewController {
 
     
     
-    func zoomToAnnotaion(toRestaurant restautantData: Restaurant) -> (Bool, String?) {
+    func zoomToAnnotaion(toRestaurant restautantData: RestaurantModel) -> (Bool, String?) {
         var success = true
         var msg: String? = nil
         
         let gocoder = CLGeocoder()
-        gocoder.geocodeAddressString(restautantData.location) { (placeMarks, error) in
+        gocoder.geocodeAddressString(restautantData.location ?? "") { (placeMarks, error) in
             if let unwrapError = error {
                 success = false
                 msg = unwrapError.localizedDescription
