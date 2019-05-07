@@ -27,7 +27,9 @@ class RestaurantTableViewController: UITableViewController {
         return fetchReslutController
     }()
     lazy var allRestaurant = [RestaurantModel]()
+    lazy var searchRestaurant = [RestaurantModel]()
     
+    var searchController: UISearchController? = nil
     
     
     override func viewDidLoad() {
@@ -59,8 +61,17 @@ class RestaurantTableViewController: UITableViewController {
         self.tableView.backgroundView = self.emptyView
         self.tableView.backgroundView?.isHidden = true
         
+        //add search bar
+        self.searchController = UISearchController(searchResultsController: nil)
+        self.searchController?.searchResultsUpdater = self
+        self.searchController?.dimsBackgroundDuringPresentation = false
+        self.searchController?.searchBar.placeholder = "Enter name to search"
+        self.navigationItem.searchController = self.searchController
+        //self.tableView.tableHeaderView = self.searchController?.searchBar
+        
         //load restaurant data
         loadData()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,14 +103,15 @@ class RestaurantTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return RestaurantFactory.getInstance().getRestaurants().count
-        return allRestaurant.count
+        return (self.searchController?.isActive  ?? false) ? searchRestaurant.count : allRestaurant.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "restaurantCell", for: indexPath) as! RestaurantTableViewCell
         //cell.initByData(RestaurantFactory.getInstance().getRestaurants()[indexPath.row])
-        cell.initByData(allRestaurant[indexPath.row])
+        let cellData = (self.searchController?.isActive ?? false) ? searchRestaurant[indexPath.row] : allRestaurant[indexPath.row]
+        cell.initByData(cellData)
         return cell
     }
  
@@ -222,6 +234,16 @@ class RestaurantTableViewController: UITableViewController {
         let swipActionCfg = UISwipeActionsConfiguration(actions: [delectAction, markAction, shareAction])
         return swipActionCfg
     }
+    
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        var canEdit = true
+        if self.searchController?.isActive ?? false {
+            canEdit = false
+        }
+        
+        return canEdit
+    }
 
     
     // MARK: - Navigation
@@ -231,7 +253,8 @@ class RestaurantTableViewController: UITableViewController {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let restaurantDetailView = segue.destination as! RestautantDetailViewController
                 //restaurantDetailView.restaurantData = RestaurantFactory.getInstance().getRestaurants()[indexPath.row]
-                restaurantDetailView.restaurantData = self.allRestaurant[indexPath.row]
+                let seleteRestaurant = (self.searchController?.isActive ?? false) ? searchRestaurant[indexPath.row] : allRestaurant[indexPath.row]
+                restaurantDetailView.restaurantData = seleteRestaurant
             }
         }
     }
@@ -273,6 +296,21 @@ class RestaurantTableViewController: UITableViewController {
     private func updateMarkImageStateForCell(_ cell: RestaurantTableViewCell, isVisible: Bool){
         cell.markImageView.isHidden = !isVisible
         cell.tintColor = #colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1)
+    }
+    
+    
+    private func filterRestauran(byName searchText: String) -> [RestaurantModel] {
+        var filterResult: [RestaurantModel] = []
+        filterResult = self.allRestaurant.filter { (restaurant) -> Bool in
+            if let fullName = restaurant.name {
+                if fullName.localizedCaseInsensitiveContains(searchText) {
+                    return true
+                }
+            }
+            
+            return false
+        }
+        return filterResult
     }
     
    
@@ -324,5 +362,17 @@ extension RestaurantTableViewController: NSFetchedResultsControllerDelegate {
         self.tableView.endUpdates()
     }
 
+}
+
+
+// MARK: - UISearchCotroller search reslut updater
+extension RestaurantTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        if let userTypedText = searchController.searchBar.text {
+            self.searchRestaurant = filterRestauran(byName: userTypedText)
+            self.tableView.reloadData()
+        }
+    }
+    
 }
 

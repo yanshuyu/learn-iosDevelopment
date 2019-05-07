@@ -193,6 +193,29 @@ self.containerView.transform = CGAffineTransform.identity
 	...
 	appDelegate.saveContext()
 
+## 使用UISearchController添加搜索框
+1）可将UISearchController添加到NavigationBar或UITableView的HeaderView区域，或其他地方。
+    let searchController = UISearchController(searchResultsController: nil)
+    searchController.searchResultsUpdater = YourUISearchResultsUpdatingDelegate
+    YourViewController.navigationItem.searchController = searchController
+    YourViewController.tableView.tableHeaderView = searchController?.searchBar
+
+2)Conform UISearchResultsUpdating protocol 实现搜索筛选逻辑
+extension YourViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) 
+}
+
+3)通过searchController.isActive 动态使用筛选列表或是完整列表填充TableView
+override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return (self.searchController?.isActive  ?? false) ? searchRestaurant.count : allRestaurant.count
+}
+override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "restaurantCell", for: indexPath) as! RestaurantTableViewCell
+    let cellData = (self.searchController?.isActive ?? false) ? searchRestaurant[indexPath.row] : allRestaurant[indexPath.row]
+    cell.initByData(cellData)
+    return cell
+}
+
 
 
 
