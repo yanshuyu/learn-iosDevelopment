@@ -31,7 +31,6 @@ class RestaurantTableViewController: UITableViewController {
     
     var searchController: UISearchController? = nil
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.cellLayoutMarginsFollowReadableWidth = true
@@ -86,6 +85,17 @@ class RestaurantTableViewController: UITableViewController {
             self.tableView.separatorStyle = .none
         }
         self.tableView.reloadData()
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if !UserDefaults.standard.bool(forKey: "hasCompletedWalkthrough") {
+            let walkthroughSceneStoryboard = UIStoryboard(name: "WalkThroughScreen", bundle: nil)
+            if let walkthroughViewController = walkthroughSceneStoryboard.instantiateViewController(withIdentifier: "WalkthroughViewController") as? WalkthroughViewController {
+                present(walkthroughViewController, animated: false, completion: nil)
+            }
+        }
+
     }
     
     // MARK: - Statuts bar Customizing
