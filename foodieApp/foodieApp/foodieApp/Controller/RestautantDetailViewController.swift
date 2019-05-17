@@ -36,10 +36,16 @@ class RestautantDetailViewController: UIViewController {
         if let data = restaurantData {
             self.restaurantDetailHeaderView.initByData(data)
         }
+        
+        //transparent navigation bar
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+            
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.hidesBarsOnSwipe = false
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-
+        
     }
     
     @IBAction func onMarkButtonClick(_ sender: UIButton) {
@@ -77,6 +83,13 @@ class RestautantDetailViewController: UIViewController {
                     rateViewController.restaurant = data
                 }
             }
+        }
+        
+        if segue.identifier == "detailToImageViewer" {
+            if let imageViewerController = segue.destination as? RestaurantImageViewerController {
+                imageViewerController.restaurantData = self.restaurantData
+            }
+            
         }
     }
     

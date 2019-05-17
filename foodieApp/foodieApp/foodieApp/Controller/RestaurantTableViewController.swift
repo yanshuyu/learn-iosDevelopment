@@ -49,13 +49,6 @@ class RestaurantTableViewController: UITableViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         
-       
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        if let rubikFont = UIFont(name: "Rubik-Medium", size: 40){
-            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: rubikFont,
-                                                                                 NSAttributedString.Key.foregroundColor: UIColor(red: 231.0 / 255.0, green: 76.0 / 255.0, blue: 60.0 / 255.0, alpha: 1.0)]
-        }
-        
         
         self.tableView.backgroundView = self.emptyView
         self.tableView.backgroundView?.isHidden = true
@@ -76,6 +69,13 @@ class RestaurantTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.hidesBarsOnSwipe = true
+        
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        if let rubikFont = UIFont(name: "Rubik-Medium", size: 40){
+            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: rubikFont,
+                                                                                 NSAttributedString.Key.foregroundColor: UIColor(red: 231.0 / 255.0, green: 76.0 / 255.0, blue: 60.0 / 255.0, alpha: 1.0)]
+        }
+        
         //self.loadData()
         if self.allRestaurant.count > 0 {
             self.tableView.backgroundView?.isHidden = true

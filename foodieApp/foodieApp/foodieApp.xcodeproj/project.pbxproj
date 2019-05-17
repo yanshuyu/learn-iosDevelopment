@@ -15,6 +15,7 @@
 		112C8F97228AC51F000CD87B /* WalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112C8F96228AC51F000CD87B /* WalkthroughViewController.swift */; };
 		1143327E22679BF200B3180A /* RestaurantDetailMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143327D22679BF200B3180A /* RestaurantDetailMapViewController.swift */; };
 		11433280226B12BF00B3180A /* RestaurantRateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143327F226B12BF00B3180A /* RestaurantRateViewController.swift */; };
+		11816DD2228EADF4001D0DF5 /* RestaurantImageViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11816DD1228EADF4001D0DF5 /* RestaurantImageViewerController.swift */; };
 		118F8985227AD91E0068295C /* foodie.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 118F8983227AD91E0068295C /* foodie.xcdatamodeld */; };
 		11D18B9E22804EEA006CB7FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11D18B9D22804EEA006CB7FD /* Assets.xcassets */; };
 		11FF102A226086A20077F4E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FF1029226086A20077F4E7 /* AppDelegate.swift */; };
@@ -51,6 +52,7 @@
 		112C8F96228AC51F000CD87B /* WalkthroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughViewController.swift; sourceTree = "<group>"; };
 		1143327D22679BF200B3180A /* RestaurantDetailMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailMapViewController.swift; sourceTree = "<group>"; };
 		1143327F226B12BF00B3180A /* RestaurantRateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantRateViewController.swift; sourceTree = "<group>"; };
+		11816DD1228EADF4001D0DF5 /* RestaurantImageViewerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantImageViewerController.swift; sourceTree = "<group>"; };
 		118F8984227AD91E0068295C /* foodie.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = foodie.xcdatamodel; sourceTree = "<group>"; };
 		11D18B9D22804EEA006CB7FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		11FF1026226086A20077F4E7 /* foodieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = foodieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,6 +161,7 @@
 				112C8F92228ABA90000CD87B /* WalkthrougPageContentViewController.swift */,
 				112C8F94228ABDB1000CD87B /* WalkthroughPageViewController.swift */,
 				112C8F96228AC51F000CD87B /* WalkthroughViewController.swift */,
+				11816DD1228EADF4001D0DF5 /* RestaurantImageViewerController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				11FF105E22647F080077F4E7 /* RestautantDetailHeaderView.swift in Sources */,
 				11433280226B12BF00B3180A /* RestaurantRateViewController.swift in Sources */,
 				11169635227180FE0081443E /* RoundTextView.swift in Sources */,
+				11816DD2228EADF4001D0DF5 /* RestaurantImageViewerController.swift in Sources */,
 				112C8F97228AC51F000CD87B /* WalkthroughViewController.swift in Sources */,
 				112C8F93228ABA90000CD87B /* WalkthrougPageContentViewController.swift in Sources */,
 				11169633227077CB0081443E /* NewRestaurantTableViewController.swift in Sources */,
