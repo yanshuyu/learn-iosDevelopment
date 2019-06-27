@@ -20,6 +20,9 @@
 		11D18B9E22804EEA006CB7FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11D18B9D22804EEA006CB7FD /* Assets.xcassets */; };
 		11FA2A16229FDA7000836DAA /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11FA2A15229FDA7000836DAA /* About.storyboard */; };
 		11FA2A18229FDAE200836DAA /* Discover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11FA2A17229FDAE200836DAA /* Discover.storyboard */; };
+		11FA2A1A22A029E900836DAA /* AboutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FA2A1922A029E900836DAA /* AboutTableViewController.swift */; };
+		11FA2A1C22A03CE800836DAA /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FA2A1B22A03CE800836DAA /* WKWebViewController.swift */; };
+		11FA2A1E22A043E300836DAA /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11FA2A1D22A043E300836DAA /* WebKit.framework */; };
 		11FF102A226086A20077F4E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FF1029226086A20077F4E7 /* AppDelegate.swift */; };
 		11FF102F226086A20077F4E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11FF102D226086A20077F4E7 /* Main.storyboard */; };
 		11FF1034226086A30077F4E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11FF1032226086A30077F4E7 /* LaunchScreen.storyboard */; };
@@ -59,6 +62,9 @@
 		11D18B9D22804EEA006CB7FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		11FA2A15229FDA7000836DAA /* About.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = About.storyboard; sourceTree = "<group>"; };
 		11FA2A17229FDAE200836DAA /* Discover.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Discover.storyboard; sourceTree = "<group>"; };
+		11FA2A1922A029E900836DAA /* AboutTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTableViewController.swift; sourceTree = "<group>"; };
+		11FA2A1B22A03CE800836DAA /* WKWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewController.swift; sourceTree = "<group>"; };
+		11FA2A1D22A043E300836DAA /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		11FF1026226086A20077F4E7 /* foodieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = foodieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11FF1029226086A20077F4E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11FF102E226086A20077F4E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -91,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11FA2A1E22A043E300836DAA /* WebKit.framework in Frameworks */,
 				11FF1067226736560077F4E7 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -168,6 +175,8 @@
 				112C8F94228ABDB1000CD87B /* WalkthroughPageViewController.swift */,
 				112C8F96228AC51F000CD87B /* WalkthroughViewController.swift */,
 				11816DD1228EADF4001D0DF5 /* RestaurantImageViewerController.swift */,
+				11FA2A1922A029E900836DAA /* AboutTableViewController.swift */,
+				11FA2A1B22A03CE800836DAA /* WKWebViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -209,6 +218,7 @@
 		11FF1065226736560077F4E7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				11FA2A1D22A043E300836DAA /* WebKit.framework */,
 				11FF1066226736560077F4E7 /* MapKit.framework */,
 			);
 			name = Frameworks;
@@ -312,8 +322,10 @@
 				11169633227077CB0081443E /* NewRestaurantTableViewController.swift in Sources */,
 				11FF1062226595080077F4E7 /* RestautantDetailViewDescCell.swift in Sources */,
 				11FF1046226300100077F4E7 /* RestautantDetailViewController.swift in Sources */,
+				11FA2A1C22A03CE800836DAA /* WKWebViewController.swift in Sources */,
 				112C8F95228ABDB1000CD87B /* WalkthroughPageViewController.swift in Sources */,
 				11FF10442261B18A0077F4E7 /* Restaurant.swift in Sources */,
+				11FA2A1A22A029E900836DAA /* AboutTableViewController.swift in Sources */,
 				11FF102A226086A20077F4E7 /* AppDelegate.swift in Sources */,
 				11FF10422261AA220077F4E7 /* RestaurantTableViewCell.swift in Sources */,
 				1143327E22679BF200B3180A /* RestaurantDetailMapViewController.swift in Sources */,

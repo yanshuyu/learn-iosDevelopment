@@ -216,6 +216,16 @@ override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexP
     return cell
 }
 
+## 应用内嵌web功能（Mobile safari）
+### Mobile safari 从应用跳转到系统原生safari浏览器查看web
+    uiapplication.open(url: options: completionHandler:)
+### WKWebView 应用内窗口控件查看web, 无导航功能
+    let request = URLRequest(url)
+    wkwebview.load(request)
+### SFSafariViewController 全屏查看web，有导航功能
+   let safariController = SFSafariViewController(url)
+   viewController.present(safariController, ...)
+
 
 
 
