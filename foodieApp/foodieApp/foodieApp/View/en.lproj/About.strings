@@ -1,0 +1,15 @@
+
+/* Class = "UIViewController"; title = "Web View"; ObjectID = "2N8-Fh-Bng"; */
+"2N8-Fh-Bng.title" = "Web View";
+
+/* Class = "UINavigationItem"; title = "About"; ObjectID = "3F6-8Y-NZe"; */
+"3F6-8Y-NZe.title" = "About";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Jep-aM-TLv"; */
+"Jep-aM-TLv.text" = "Title";
+
+/* Class = "UITabBarItem"; title = "About"; ObjectID = "bEU-kF-jW5"; */
+"bEU-kF-jW5.title" = "About";
+
+/* Class = "UINavigationController"; title = "About Nav Controller Scene"; ObjectID = "ttd-yj-9Bw"; */
+"ttd-yj-9Bw.title" = "About Nav Controller Scene";

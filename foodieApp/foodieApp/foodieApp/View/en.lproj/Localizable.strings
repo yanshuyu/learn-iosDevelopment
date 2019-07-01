@@ -1,0 +1,18 @@
+/* 
+  Localizable.strings
+  foodieApp
+
+  Created by sy on 2019/7/1.
+  Copyright © 2019 sy. All rights reserved.
+*/
+"search-bar-place-holder" = "Enter name to search";
+
+"about-feedback-section-title" = "Feedback";
+"rate-us-on-app-store" = "Rate us on app store";
+"tell-us-your-feedback" = "tell us your feedback";
+
+"about-followus-section-title" = "Follow us";
+"follow-us-twitter" = "Twitter";
+"follow-us-facebook" = "Facebook";
+"follw-us-instagram" = "Instagram";
+

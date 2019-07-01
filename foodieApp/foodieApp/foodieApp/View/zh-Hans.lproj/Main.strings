@@ -1,0 +1,117 @@
+
+/* Class = "UILabel"; text = "location"; ObjectID = "1Da-pa-2US"; */
+"1Da-pa-2US.text" = "location";
+
+/* Class = "UIButton"; normalTitle = "Sad"; ObjectID = "98u-YO-mIP"; */
+"98u-YO-mIP.normalTitle" = "Sad";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Bk2-oC-pjI"; */
+"Bk2-oC-pjI.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Happy"; ObjectID = "EMA-uw-11n"; */
+"EMA-uw-11n.normalTitle" = "Happy";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "FcF-pL-l6f"; */
+"FcF-pL-l6f.text" = "Description";
+
+/* Class = "UILabel"; text = "type"; ObjectID = "GAd-BV-cMZ"; */
+"GAd-BV-cMZ.text" = "type";
+
+/* Class = "UITextField"; placeholder = "Fill in the resturant Phone"; ObjectID = "GYa-Dh-bps"; */
+"GYa-Dh-bps.placeholder" = "Fill in the resturant Phone";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "IKC-Ok-MaT"; */
+"IKC-Ok-MaT.title" = "Item";
+
+/* Class = "UIViewController"; title = "Restaurent Detail"; ObjectID = "JGW-IN-hRV"; */
+"JGW-IN-hRV.title" = "Restaurent Detail";
+
+/* Class = "UIButton"; normalTitle = "Cool"; ObjectID = "KLr-nL-TuX"; */
+"KLr-nL-TuX.normalTitle" = "Cool";
+
+/* Class = "UITableViewController"; title = "Foodie Main"; ObjectID = "Kto-0o-x5k"; */
+"Kto-0o-x5k.title" = "Foodie Main";
+
+/* Class = "UITabBarItem"; title = "Favorites"; ObjectID = "MvD-Ku-Hvz"; */
+"MvD-Ku-Hvz.title" = "最爱";
+
+/* Class = "UILabel"; text = "How to get here"; ObjectID = "NOw-Zs-iwu"; */
+"NOw-Zs-iwu.text" = "How to get here";
+
+/* Class = "UINavigationController"; title = "Main Nav Controller"; ObjectID = "PSw-gI-H3t"; */
+"PSw-gI-H3t.title" = "Main Nav Controller";
+
+/* Class = "UIButton"; normalTitle = "Love"; ObjectID = "RLx-Mh-wEc"; */
+"RLx-Mh-wEc.normalTitle" = "Love";
+
+/* Class = "UIViewController"; title = "image viewer"; ObjectID = "Ro0-Y6-u7f"; */
+"Ro0-Y6-u7f.title" = "image viewer";
+
+/* Class = "UIButton"; normalTitle = "Angry"; ObjectID = "Sk9-Su-7jn"; */
+"Sk9-Su-7jn.normalTitle" = "Angry";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "TBd-n5-oz3"; */
+"TBd-n5-oz3.title" = "Item";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "YCX-YL-Tf4"; */
+"YCX-YL-Tf4.text" = "Label";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "YY8-Zt-yfg"; */
+"YY8-Zt-yfg.text" = "Address";
+
+/* Class = "UITextField"; placeholder = "Fill in the resturant Address"; ObjectID = "bhz-rK-Y25"; */
+"bhz-rK-Y25.placeholder" = "Fill in the resturant Address";
+
+/* Class = "UILabel"; text = "Type"; ObjectID = "cso-95-cFI"; */
+"cso-95-cFI.text" = "Type";
+
+/* Class = "UITextField"; placeholder = "Fill in the resturant Type"; ObjectID = "eJU-P1-OfG"; */
+"eJU-P1-OfG.placeholder" = "Fill in the resturant Type";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "fc4-3B-byV"; */
+"fc4-3B-byV.title" = "Item";
+
+/* Class = "UINavigationItem"; title = "Favorites"; ObjectID = "go6-3P-6Lt"; */
+"go6-3P-6Lt.title" = "最爱";
+
+/* Class = "UIViewController"; title = "Restautant  Rate"; ObjectID = "hd9-9M-YeN"; */
+"hd9-9M-YeN.title" = "Restautant  Rate";
+
+/* Class = "UILabel"; text = "Lable"; ObjectID = "j1z-jn-ZRI"; */
+"j1z-jn-ZRI.text" = "Lable";
+
+/* Class = "UITableViewController"; title = "New Restaurent"; ObjectID = "k8q-oi-X6V"; */
+"k8q-oi-X6V.title" = "New Restaurent";
+
+/* Class = "UIViewController"; title = "Restaurant  Map"; ObjectID = "kro-7C-jqP"; */
+"kro-7C-jqP.title" = "Restaurant  Map";
+
+/* Class = "UILabel"; text = "name "; ObjectID = "lJk-K3-gCy"; */
+"lJk-K3-gCy.text" = "name ";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "odb-bP-C6l"; */
+"odb-bP-C6l.title" = "Item";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "p67-Px-Itj"; */
+"p67-Px-Itj.title" = " ";
+
+/* Class = "UINavigationItem"; title = "New Restaurant"; ObjectID = "pyB-vU-bAr"; */
+"pyB-vU-bAr.title" = "New Restaurant";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "qtZ-6C-vo6"; */
+"qtZ-6C-vo6.text" = "Name";
+
+/* Class = "UILabel"; text = "Phone"; ObjectID = "u8M-dV-EOn"; */
+"u8M-dV-EOn.text" = "Phone";
+
+/* Class = "UINavigationController"; title = "New Restautant Nav Controller"; ObjectID = "uNx-cJ-AXy"; */
+"uNx-cJ-AXy.title" = "New Restautant Nav Controller";
+
+/* Class = "UITextField"; placeholder = "Fill in the resturant name"; ObjectID = "xVD-xF-Abx"; */
+"xVD-xF-Abx.placeholder" = "Fill in the resturant name";
+
+/* Class = "UIButton"; normalTitle = "Rate it"; ObjectID = "yDq-T3-A03"; */
+"yDq-T3-A03.normalTitle" = "Rate it";
+
+/* Class = "UILabel"; text = "NameLable"; ObjectID = "zLa-XU-k1r"; */
+"zLa-XU-k1r.text" = "NameLable";

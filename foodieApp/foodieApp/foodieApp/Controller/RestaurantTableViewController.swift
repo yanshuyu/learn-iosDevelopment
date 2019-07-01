@@ -57,7 +57,7 @@ class RestaurantTableViewController: UITableViewController {
         self.searchController = UISearchController(searchResultsController: nil)
         self.searchController?.searchResultsUpdater = self
         self.searchController?.dimsBackgroundDuringPresentation = false
-        self.searchController?.searchBar.placeholder = "Enter name to search"
+        self.searchController?.searchBar.placeholder = NSLocalizedString("search-bar-place-holder", comment: "");
         self.navigationItem.searchController = self.searchController
         //self.tableView.tableHeaderView = self.searchController?.searchBar
         

@@ -12,13 +12,14 @@ import SafariServices
 class AboutTableViewController: UITableViewController {
     
     let sectionsData = [
-        (title:"Feedback", rows:[   (image:"store", text:"Rate us on App Store", link:"https://www.apple.com/itunes/charts/paid-apps/"),
-                                    (image:"chat", text:"Tell us your feedback", link:"https://www.appcoda.com/contact"),
+        (title:NSLocalizedString("about-feedback-section-title", comment: "about scene table view feedback section title"), rows:[
+            (image:"store", text:NSLocalizedString("rate-us-on-app-store", comment: "Rate us on App Store"), link:"https://www.apple.com/itunes/charts/paid-apps/"),
+            (image:"chat", text:NSLocalizedString("tell-us-your-feedback", comment: "Tell us your feedback"), link:"https://www.appcoda.com/contact"),
             ]),
-        (title:"Follow Us", rows:[
-                                    (image:"twitter", text:"Twitter", link:"https://twitter.com/appcodamobile"),
-                                    (image:"facebook", text:"Facebook", link:"https://facebook.com/appcodamobile"),
-                                    (image:"instagram", text:"Instagram", link:"https://www.instagram.com/appcodadotcom"),
+        (title:NSLocalizedString("about-followus-section-title", comment: "about scene table view follow us section title") , rows:[
+                                    (image:"twitter", text:NSLocalizedString("follow-us-twitter", comment: ""), link:"https://twitter.com/appcodamobile"),
+                                    (image:"facebook", text:NSLocalizedString("follow-us-facebook", comment: ""), link:"https://facebook.com/appcodamobile"),
+                                    (image:"instagram", text:NSLocalizedString("follw-us-instagram", comment: ""), link:"https://www.instagram.com/appcodadotcom"),
             ])
     ]
     
