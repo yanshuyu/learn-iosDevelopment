@@ -61,6 +61,9 @@ class RestaurantTableViewController: UITableViewController {
         self.navigationItem.searchController = self.searchController
         //self.tableView.tableHeaderView = self.searchController?.searchBar
         
+        //register for peek & pop
+        registerForPreviewing(with: self, sourceView: self.view)
+        
         //load restaurant data
         loadData()
         
@@ -80,9 +83,11 @@ class RestaurantTableViewController: UITableViewController {
         if self.allRestaurant.count > 0 {
             self.tableView.backgroundView?.isHidden = true
             self.tableView.separatorStyle = .singleLine
+            self.tableView.isUserInteractionEnabled = true
         }else{
             self.tableView.backgroundView?.isHidden = false
             self.tableView.separatorStyle = .none
+            self.tableView.isUserInteractionEnabled = false
         }
         self.tableView.reloadData()
     }
@@ -92,6 +97,7 @@ class RestaurantTableViewController: UITableViewController {
         if !UserDefaults.standard.bool(forKey: "hasCompletedWalkthrough") {
             let walkthroughSceneStoryboard = UIStoryboard(name: "WalkThroughScreen", bundle: nil)
             if let walkthroughViewController = walkthroughSceneStoryboard.instantiateViewController(withIdentifier: "WalkthroughViewController") as? WalkthroughViewController {
+                walkthroughViewController.modalPresentationStyle = .fullScreen
                 present(walkthroughViewController, animated: false, completion: nil)
             }
         }
@@ -260,8 +266,8 @@ class RestaurantTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "MainToDetail" {
-            if let indexPath = self.tableView.indexPathForSelectedRow {
-                let restaurantDetailView = segue.destination as! RestautantDetailViewController
+            if let indexPath = self.tableView.indexPathForSelectedRow,
+                let restaurantDetailView = segue.destination as? RestautantDetailViewController {
                 //restaurantDetailView.restaurantData = RestaurantFactory.getInstance().getRestaurants()[indexPath.row]
                 let seleteRestaurant = (self.searchController?.isActive ?? false) ? searchRestaurant[indexPath.row] : allRestaurant[indexPath.row]
                 restaurantDetailView.restaurantData = seleteRestaurant
@@ -384,5 +390,34 @@ extension RestaurantTableViewController: UISearchResultsUpdating {
         }
     }
     
+}
+
+// MARK: - 3d touch peek & pop
+extension RestaurantTableViewController: UIViewControllerPreviewingDelegate {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = self.tableView.indexPathForRow(at: location) else {
+            return nil
+        }
+        
+        guard let cell = self.tableView.cellForRow(at: indexPath) else {
+            return nil
+        }
+        
+        guard let previewVC = self.storyboard?.instantiateViewController(withIdentifier: "restaurantDetailVC") as? RestautantDetailViewController else {
+            return nil
+        }
+        
+        previewVC.restaurantData = self.allRestaurant[indexPath.row]
+        previewingContext.sourceRect = cell.frame
+        
+        return previewVC
+        
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        show(viewControllerToCommit, sender: self)
+    }
+    
+
 }
 

@@ -33,6 +33,7 @@ class WalkthroughViewController: UIViewController {
     @IBAction func onNextButtonClick(_ sender: UIButton) {
         if self.nextButtonToDismiss {
             UserDefaults.standard.set(true, forKey: "hasCompletedWalkthrough")
+            configShotcutItems()
             dismiss(animated: true, completion: nil)
             return
         }
@@ -50,6 +51,22 @@ class WalkthroughViewController: UIViewController {
         self.pageControl.currentPage = index
         self.nextButton.setTitle(isLastPage ? "Get Started" : "Next", for: .normal)
         self.skipButton.isHidden = isLastPage
+    }
+    
+    private func configShotcutItems() {
+        let shotcutPrefix = Bundle.main.bundleIdentifier! + ".shotcut"
+        let newShotcut = UIApplicationShortcutItem(type: shotcutPrefix + ".new",
+                                                        localizedTitle: "New",
+                                                        localizedSubtitle: nil,
+                                                        icon: UIApplicationShortcutIcon(type: .add),
+                                                        userInfo: nil)
+        let aboutShotcut = UIApplicationShortcutItem(type: shotcutPrefix + ".about",
+                                                     localizedTitle: "About",
+                                                     localizedSubtitle: nil,
+                                                     icon: UIApplicationShortcutIcon(type: .message),
+                                                     userInfo: nil)
+        
+        UIApplication.shared.shortcutItems = [aboutShotcut, newShotcut]
     }
 }
 

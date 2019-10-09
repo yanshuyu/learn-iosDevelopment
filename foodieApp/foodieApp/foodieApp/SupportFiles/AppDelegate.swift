@@ -76,6 +76,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         RestaurantFactory.getInstance().reset()
     }
     
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        if let action = shortcutItem.type.split(separator: ".").last {
+            switch action {
+            case "new":
+                if let tabBarVC = self.window?.rootViewController as? UITabBarController {
+                    tabBarVC.selectedIndex = 0
+                    if let navVC = tabBarVC.selectedViewController as? UINavigationController,
+                    navVC.children.count <= 1 {
+                        navVC.children[0].performSegue(withIdentifier: "newRestaurant", sender: nil)
+                        completionHandler(true)
+                        return
+                    }
+                }
+                completionHandler(false)
+                break
+
+                
+            case "about":
+                if let tabBarVC = self.window?.rootViewController as? UITabBarController {
+                    if let navVC = tabBarVC.selectedViewController as? UINavigationController,
+                    navVC.children.count <= 1 {
+                        tabBarVC.selectedIndex = 1
+                        completionHandler(true)
+                        return
+                    }
+                }
+                completionHandler(false)
+                break
+            default:
+                completionHandler(false)
+            }
+            
+        }
+    }
+    
     
     // MARk - : CoreData Stack
     

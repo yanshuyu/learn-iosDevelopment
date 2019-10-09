@@ -15,7 +15,7 @@ class RoundTextView: UITextView {
     var roundRadius: CGFloat = 4
    
     @IBInspectable
-    var fillColor: UIColor = UIColor.white
+    var fillColor: UIColor = UIColor.darkGray
     
     @IBInspectable
     var strokeColor: UIColor = UIColor.lightGray
