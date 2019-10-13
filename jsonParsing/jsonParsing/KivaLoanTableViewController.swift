@@ -24,9 +24,9 @@ class KivaLoanTableViewController: UITableViewController {
                 print("fetch error:\(e)")
                 return
             }
-            print("fetch reslut: \(result)")
+            //print("fetch reslut: \(result)")
+            self.loans = result
             OperationQueue.main.addOperation {
-                self.loans = result
                 self.tableView.reloadData()
             }
         }
@@ -83,6 +83,7 @@ class KivaLoanTableViewController: UITableViewController {
             }
             
             if let strongSelf = self {
+                //let parsedResult = strongSelf.parseLoanDataManully(data!)
                 let parsedResult = strongSelf.parseLoanData(data!)
                 complectionHandler(parsedResult.0, parsedResult.1)
             }
@@ -90,7 +91,7 @@ class KivaLoanTableViewController: UITableViewController {
         kiavlLoanRequestTask.resume()
     }
     
-    private func parseLoanData(_ data: Data) -> ([Loan],Error?) {
+    private func parseLoanDataManully(_ data: Data) -> ([Loan],Error?) {
         var reslut = [Loan]()
         var e: Error? = nil
         do {
@@ -111,6 +112,20 @@ class KivaLoanTableViewController: UITableViewController {
         }
         
         return (reslut, e)
+    }
+    
+    private func parseLoanData(_ data: Data) -> ([Loan], Error?) {
+        var result: [Loan] = []
+        var e: Error? = nil
+        
+        do {
+            let loanDataStore = try JSONDecoder().decode(LoanDataStore.self, from: data)
+            result = loanDataStore.loans
+        } catch  {
+            e = error
+        }
+        
+        return (result, e)
     }
 
 
